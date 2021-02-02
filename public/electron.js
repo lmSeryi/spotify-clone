@@ -8,7 +8,15 @@ const isDev = require("electron-is-dev");
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: 900, height: 680 });
+  mainWindow = new BrowserWindow({
+    width: 1400,
+    height: 900,
+    resizable: false,
+    title: "Musicfy",
+    titleBarStyle: "hiddenInset",
+  });
+
+  mainWindow.setMenuBarVisibility(false);
   mainWindow.loadURL(
     isDev
       ? "http://localhost:3000"

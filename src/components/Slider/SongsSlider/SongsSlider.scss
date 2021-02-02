@@ -1,0 +1,61 @@
+@import "../../../scss/index.scss";
+
+.songs-slider {
+  margin: 50px 0;
+  > h2 {
+    border-bottom: 1px solid $border-grey-light;
+    padding: 10px;
+    font-size: 22px;
+  }
+
+  &__list {
+    .slick-prev {
+      left: -35px;
+    }
+
+    .slick-next {
+      right: -35px;
+    }
+
+    &-song {
+      padding: 20px;
+
+      .avatar {
+        height: 160px;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+          width: 100%;
+          opacity: 0;
+          cursor: pointer;
+
+          &:hover {
+            opacity: 1;
+          }
+
+          &::before {
+            font-size: 50px;
+            color: $font-light;
+          }
+          transition: 0.5s ease-in-out;
+          -webkit-transition: 0.5s ease-in-out;
+          -moz-transition: 0.5s ease-in-out;
+          -ms-transition: 0.5s ease-in-out;
+          -o-transition: 0.5s ease-in-out;
+        }
+      }
+
+      h3 {
+        color: $font-grey;
+        margin-top: 10px !important;
+        font-size: 16px;
+      }
+    }
+  }
+}

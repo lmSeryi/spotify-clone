@@ -17,5 +17,11 @@
   }
 
   .content {
+    overflow: scroll;
+    height: calc(100vh - 105px);
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }

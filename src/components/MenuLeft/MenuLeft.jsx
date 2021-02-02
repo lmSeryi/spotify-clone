@@ -7,7 +7,9 @@ import BasicModal from "../Modal/BasicModal";
 import { isUserAdmin } from "../../utils/api";
 
 import "./MenuLeft.scss";
-import AddArtistForm from "./../Artists/AddArtistForm/AddArtistForm";
+import AddArtistForm from "./../Artists/AddArtistForm";
+import AddAlbumForm from "./../Albums/AddAlbumForm";
+import AddSongForm from "./../Songs/AddSongForm";
 
 const MenuLeft = ({ user, location }) => {
   const [activeMenu, setActiveMenu] = useState(location.pathname);
@@ -19,7 +21,7 @@ const MenuLeft = ({ user, location }) => {
   useEffect(() => {
     isUserAdmin(user.uid).then((res) => setIsAdmin(res));
     setActiveMenu(location.pathname);
-  }, [location.pathname]);
+  }, []);
 
   const handlerMenu = (e, menu) => {
     setActiveMenu(menu.to);
@@ -34,7 +36,12 @@ const MenuLeft = ({ user, location }) => {
         break;
       case "song":
         setTitleModal("Nueva Canción");
-        setContentModal(<h2>Agregar nueva canción</h2>);
+        setContentModal(<AddSongForm setVisible={setVisible} />);
+        setVisible(true);
+        break;
+      case "album":
+        setTitleModal("Nuevo Album");
+        setContentModal(<AddAlbumForm setVisible={setVisible} />);
         setVisible(true);
         break;
       default:
@@ -65,16 +72,28 @@ const MenuLeft = ({ user, location }) => {
             name="artists"
             onClick={handlerMenu}
           >
-            <Icon name="music" /> Artistas
+            <Icon name="user" /> Artistas
+          </Menu.Item>
+          <Menu.Item
+            as={Link}
+            to="/albums"
+            active={activeMenu === "/albums"}
+            name="albums"
+            onClick={handlerMenu}
+          >
+            <Icon name="window maximize outline" /> Álbumes
           </Menu.Item>
         </div>
         {isAdmin && (
           <div className="footer">
-            <Menu.Item onClick={() => handlerModal("artist")}>
-              <Icon name="plus square outline" /> Nuevo Artista
-            </Menu.Item>
             <Menu.Item onClick={() => handlerModal("song")}>
               <Icon name="plus square outline" /> Nueva Canción
+            </Menu.Item>
+            <Menu.Item onClick={() => handlerModal("album")}>
+              <Icon name="plus square outline" /> Nuevo Album
+            </Menu.Item>
+            <Menu.Item onClick={() => handlerModal("artist")}>
+              <Icon name="plus square outline" /> Nuevo Artista
             </Menu.Item>
           </div>
         )}
